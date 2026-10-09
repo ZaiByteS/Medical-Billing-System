@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PASIG HEALTH - Billing Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="class1">
+    <aside class="class2">
+      <div class="class3">
+        <div class="LogoBackground">+</div>
+        <div>
+          <h1 style="font-size: 15px; font-weight: bold; color: #fff;">PASIG HEALTH</h1>
+          <p style="font-size: 11px; color: #94a3b8;">Billing & Health Records</p>
+        </div>
+      </div>
+
+      <nav class="class5">
+        <a href="billing.html" class="class6 class7">
+          <i class="fa-solid fa-file-invoice-dollar" style="width: 18px;"></i>
+          <span>Billing Form</span>
+        </a>
+        <a href="history.html" class="class6">
+          <i class="fa-solid fa-clock-rotate-left" style="width: 18px;"></i>
+          <span>Records & History</span>
+        </a>
+        <a href="rates.html" class="class6">
+          <i class="fa-solid fa-list-check" style="width: 18px;"></i>
+          <span>Room & Service Rates</span>
+        </a>
+        <a href="payments.html" class="class6">
+          <i class="fa-solid fa-wallet" style="width: 18px;"></i>
+          <span>Payment Collection</span>
+        </a>
+        <a href="reports.html" class="class6">
+          <i class="fa-solid fa-chart-line" style="width: 18px;"></i>
+          <span>Billing Reports</span>
+        </a>
+      </nav>
+
+      <div style="padding: 12px; border-top: 1px solid #1e293b; font-size: 11px; color: #64748b;">
+        <p style="color: #cbd5e1; font-weight: bold;">Terminal: BSIT Tester</p>
+        <p>Operator: Admin</p>
+      </div>
+    </aside>
+
+    <main class="class8">
+      <header class="class9">
+        <div>
+          <h2 style="font-size: 18px; font-weight: bold; color: #0f172a;">Patient Billing & Discharge Form</h2>
+          <p style="font-size: 12px; color: #64748b;">Generate accurate itemized medical statements and hospital fee calculations.</p>
+        </div>
+        <div style="font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 4px;">
+          <i class="fa-regular fa-calendar" style="color: #64748b; margin-right: 5px;"></i>
+          <span id="current-date-display" style="font-weight: bold;">--</span>
+        </div>
+      </header>
+
+      <div class="class10">
+        <form id="billingForm" onsubmit="handleFormSubmit(event)" style="display: flex; flex-direction: column; gap: 20px;">
+          
+          <!-- SECTION 1 -->
+          <div class="class11">
+            <div class="class12">
+              <span><i class="fa-solid fa-user-doctor" style="color: #2563eb; margin-right: 8px;"></i> 1. Patient & Admission Information</span>
+              <span style="font-size: 11px; color: #64748b; font-weight: normal;">* Required fields</span>
+            </div>
+            
+            <div class="class13">
+              <div class="class14">
+                <label class="class15">Patient Full Name *</label>
+                <input type="text" id="patientName" required placeholder="e.g. Zion Jakeine Cananea" class="class16">
+              </div>
+
+              <div class="class14">
+                <label class="class15">Age & Gender *</label>
+                <div style="display: flex; gap: 8px;">
+                  <input type="number" id="patientAge" required min="0" max="130" placeholder="Age" class="class16">
+                  <select id="patientGender" required class="class16">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="class14">
+                <label class="class15">Attending Physician / Doctor *</label>
+                <input type="text" id="attendingPhysician" required placeholder="Dr. Maria Santos, MD" class="class16">
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2 -->
+          <div class="class11">
+            <div class="class12">
+              <span><i class="fa-solid fa-bed" style="color: #2563eb; margin-right: 8px;"></i> 2. Accommodation & Consultation Fee</span>
+            </div>
+
+            <div class="class13">
+              <div class="class14">
+                <label class="class15">Room Accommodation Category *</label>
+                <select id="roomCategory" onchange="handleRoomChange()" class="class16">
+                  <option value="outpatient">Outpatient / No Room Stay (₱0 / day)</option>
+                  <option value="ward">General Ward (₱1,000 / day)</option>
+                  <option value="semi">Semi-Private Room (₱2,500 / day)</option>
+                  <option value="private">Private Room (₱5,000 / day)</option>
+                  <option value="icu">ICU - Intensive Care Unit (₱15,000 / day)</option>
+                </select>
+              </div>
+
+              <div class="class14">
+                <label class="class15">Number of Days Stayed *</label>
+                <input type="number" id="daysStayed" value="0" min="0" disabled oninput="calculateTotals()" class="class16 class-disabled">
+                <span id="roomRateNote" style="font-size: 11px; color: #64748b;">Daily rate: ₱0.00</span>
+              </div>
+
+              <div class="class14">
+                <label class="class15">Base Doctor/Consultation Fee (₱) *</label>
+                <input type="number" id="consultationFee" value="500" min="0" step="0.01" oninput="calculateTotals()" required class="class16">
+                <span style="font-size: 11px; color: #64748b;">Standard OPD / Inpatient Assessment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3 -->
+          <div class="class11">
+            <div class="class12">
+              <span><i class="fa-solid fa-notes-medical" style="color: #2563eb; margin-right: 8px;"></i> 3. Procedures, Laboratory & Diagnostics Intake</span>
+            </div>
+
+            <div class="class17">
+              <div class="class18">
+                <div class="class14" style="flex: 2;">
+                  <label class="class15">Procedure / Test Name</label>
+                  <input type="text" id="procName" placeholder="e.g. Complete Blood Count (CBC) or X-Ray" class="class16">
+                </div>
+
+                <div class="class14" style="flex: 1;">
+                  <label class="class15">Procedure Cost (₱)</label>
+                  <input type="number" id="procCost" placeholder="0.00" min="0" step="0.01" class="class16">
+                </div>
+
+                <div style="flex: 1;">
+                  <button type="button" onclick="addProcedure()" class="class19">
+                    <i class="fa-solid fa-plus"></i> Add Procedure
+                  </button>
+                </div>
+              </div>
+
+              <div style="border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden;">
+                <table class="class20">
+                  <thead>
+                    <tr>
+                      <th>Procedure Description</th>
+                      <th style="text-align: right;">Cost (₱)</th>
+                      <th style="text-align: center; width: 70px;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="proceduresList">
+                    <tr><td colspan="3" style="text-align: center; color: #94a3b8; font-style: italic;">No procedures added yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4 -->
+          <div class="class11">
+            <div class="class12">
+              <span><i class="fa-solid fa-pills" style="color: #2563eb; margin-right: 8px;"></i> 4. Medicine & Prescription Intake</span>
+              <span style="font-size: 11px; background: #e0e7ff; color: #1d4ed8; padding: 2px 6px; border-radius: 4px;">Explicit Unit Standard</span>
+            </div>
+
+            <div class="class17">
+              <div class="class18">
+                <div class="class14" style="flex: 2;">
+                  <label class="class15">Medicine Name</label>
+                  <input type="text" id="medName" placeholder="e.g. Paracetamol, Amoxicillin" class="class16">
+                </div>
+
+                <div class="class14" style="flex: 1;">
+                  <label class="class15">Dosage Amount</label>
+                  <input type="number" id="medDosage" placeholder="500" min="0" step="any" class="class16">
+                </div>
+
+                <div class="class14" style="flex: 1;">
+                  <label class="class15">Unit</label>
+                  <select id="medUnit" class="class16">
+                    <option value="mg">mg</option>
+                    <option value="ml">ml</option>
+                    <option value="g">g</option>
+                    <option value="mcg">mcg</option>
+                    <option value="tablets">tablets</option>
+                    <option value="capsules">capsules</option>
+                    <option value="vials">vials</option>
+                    <option value="ampoules">ampoules</option>
+                  </select>
+                </div>
+
+                <div class="class14" style="flex: 1;">
+                  <label class="class15">Cost in ₱</label>
+                  <input type="number" id="medCost" placeholder="50.00" min="0" step="0.01" class="class16">
+                </div>
+
+                <div style="flex: 1;">
+                  <button type="button" onclick="addMedicine()" class="class19">
+                    <i class="fa-solid fa-plus"></i> Add Medicine
+                  </button>
+                </div>
+              </div>
+
+              <div style="border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden;">
+                <table class="class20">
+                  <thead>
+                    <tr>
+                      <th>Medicine Detail (Name - Dosage & Unit)</th>
+                      <th style="text-align: right;">Total Price (₱)</th>
+                      <th style="text-align: center; width: 70px;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="medicinesList">
+                    <tr><td colspan="3" style="text-align: center; color: #94a3b8; font-style: italic;">No medicines added yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: TOTAL BREAKDOWN -->
+          <div class="class11" style="padding: 18px;">
+            <h3 style="font-size: 15px; font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 15px;">Billing Calculation Summary</h3>
+
+            <div class="class21">
+              <div class="class22">
+                <span style="font-size: 11px; color: #64748b; display: block;">Consultation Fee</span>
+                <span id="summaryConsultation" style="font-weight: bold; font-size: 16px; color: #0f172a;">₱500.00</span>
+              </div>
+              <div class="class22">
+                <span style="font-size: 11px; color: #64748b; display: block;">Room Total Fee</span>
+                <span id="summaryRoom" style="font-weight: bold; font-size: 16px; color: #0f172a;">₱0.00</span>
+              </div>
+              <div class="class22">
+                <span style="font-size: 11px; color: #64748b; display: block;">Procedures Total</span>
+                <span id="summaryProcedures" style="font-weight: bold; font-size: 16px; color: #0f172a;">₱0.00</span>
+              </div>
+              <div class="class22">
+                <span style="font-size: 11px; color: #64748b; display: block;">Medicines Total</span>
+                <span id="summaryMedicines" style="font-weight: bold; font-size: 16px; color: #0f172a;">₱0.00</span>
+              </div>
+            </div>
+
+            <div class="class23">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-weight: bold; font-size: 14px; color: #475569;">Grand Total Amount Due:</span>
+                <span id="summaryGrandTotal" style="font-size: 22px; font-weight: bold; color: #2563eb;">₱500.00</span>
+              </div>
+
+              <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="resetBillingForm()" class="class25">Reset Form</button>
+                <button type="submit" class="class24"><i class="fa-solid fa-file-invoice"></i> Process Billing & Save Record</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- INVOICE MODAL -->
+  <div id="invoiceModal" class="class26 class28">
+    <div class="class27">
+      <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 15px;">
+        <h3 style="font-weight: bold; font-size: 15px;">Official Patient Invoice Statement</h3>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="printInvoice()" class="class24" style="padding: 6px 12px;"><i class="fa-solid fa-print"></i> Print Invoice</button>
+          <button onclick="closeInvoiceModal()" class="class25" style="padding: 6px 12px;">Close</button>
+        </div>
+      </div>
+
+      <div id="printableInvoice" style="font-size: 12px; display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px;">
+          <div>
+            <h2 style="font-size: 16px; font-weight: bold; color: #0f172a;">PASIG GENERAL HOSPITAL</h2>
+            <p style="color: #64748b;">Medical Records & Financial Billing Department</p>
+          </div>
+          <div style="text-align: right;">
+            <p id="inv-id" style="font-weight: bold; font-family: monospace; font-size: 14px;">INV-2026-0000</p>
+            <p style="color: #64748b;">Date: <span id="inv-date">--</span></p>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 10px; border-radius: 4px; border: 1px solid #e2e8f0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <p style="color: #64748b;">Patient Name:</p>
+            <p id="inv-patientName" style="font-weight: bold; font-size: 13px;">--</p>
+            <p style="color: #64748b; margin-top: 4px;">Age / Gender: <span id="inv-patientInfo" style="color: #0f172a;">--</span></p>
+          </div>
+          <div>
+            <p style="color: #64748b;">Attending Physician:</p>
+            <p id="inv-physician" style="font-weight: bold; color: #0f172a;">--</p>
+            <p style="color: #64748b; margin-top: 4px;">Accommodation: <span id="inv-roomCategory" style="color: #0f172a;">--</span></p>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-weight: bold; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 8px;">Itemized Charges</h4>
+          <table class="class20">
+            <thead>
+              <tr>
+                <th>Item / Description</th>
+                <th style="text-align: center;">Category</th>
+                <th style="text-align: right;">Amount (₱)</th>
+              </tr>
+            </thead>
+            <tbody id="inv-itemsTable"></tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; border-top: 1px solid #cbd5e1; padding-top: 10px;">
+          <div style="width: 250px; display: flex; flex-direction: column; gap: 4px; text-align: right;">
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Consultation Fee:</span><span id="inv-subConsultation">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Room Accommodation:</span><span id="inv-subRoom">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Procedures & Lab:</span><span id="inv-subProcedures">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Pharmacy & Medicines:</span><span id="inv-subMedicines">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 15px; color: #0f172a; border-top: 1px solid #cbd5e1; padding-top: 6px; margin-top: 4px;">
+              <span>Grand Total Due:</span>
+              <span id="inv-grandTotal" style="color: #2563eb;">₱0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PASIG HEALTH - Patient History</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="class1">
+    <aside class="class2">
+      <div class="class3">
+        <div class="LogoBackground">+</div>
+        <div>
+          <h1 style="font-size: 15px; font-weight: bold; color: #fff;">PASIG HEALTH</h1>
+          <p style="font-size: 11px; color: #94a3b8;">Billing & Health Records</p>
+        </div>
+      </div>
+
+      <nav class="class5">
+        <a href="billing.html" class="class6">
+          <i class="fa-solid fa-file-invoice-dollar" style="width: 18px;"></i>
+          <span>Billing Form</span>
+        </a>
+        <a href="history.html" class="class6 class7">
+          <i class="fa-solid fa-clock-rotate-left" style="width: 18px;"></i>
+          <span>Records & History</span>
+        </a>
+        <a href="rates.html" class="class6">
+          <i class="fa-solid fa-list-check" style="width: 18px;"></i>
+          <span>Room & Service Rates</span>
+        </a>
+        <a href="payments.html" class="class6">
+          <i class="fa-solid fa-wallet" style="width: 18px;"></i>
+          <span>Payment Collection</span>
+        </a>
+        <a href="reports.html" class="class6">
+          <i class="fa-solid fa-chart-line" style="width: 18px;"></i>
+          <span>Billing Reports</span>
+        </a>
+      </nav>
+
+      <div style="padding: 12px; border-top: 1px solid #1e293b; font-size: 11px; color: #64748b;">
+        <p style="color: #cbd5e1; font-weight: bold;">Terminal: BSIT Tester</p>
+        <p>Operator: Admin</p>
+      </div>
+    </aside>
+
+    <main class="class8">
+      <header class="class9">
+        <div>
+          <h2 style="font-size: 18px; font-weight: bold; color: #0f172a;">Patient Billing Records & History</h2>
+          <p style="font-size: 12px; color: #64748b;">View, search, print, or archive past billing transactions.</p>
+        </div>
+        <div style="font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 4px;">
+          <i class="fa-regular fa-calendar" style="color: #64748b; margin-right: 5px;"></i>
+          <span id="current-date-display" style="font-weight: bold;">--</span>
+        </div>
+      </header>
+
+      <div class="class10">
+        <div class="class11" style="padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <input type="text" id="historySearch" oninput="renderHistoryTable()" placeholder="Search patient name, doctor, or ID..." class="class16" style="max-width: 300px;">
+          <div style="font-size: 12px; color: #64748b;">
+            Total Records Saved: <span id="recordCount" style="font-weight: bold; color: #0f172a;">0</span>
+          </div>
+        </div>
+
+        <div class="class11">
+          <table class="class20">
+            <thead>
+              <tr>
+                <th>Ref ID / Date</th>
+                <th>Patient Details</th>
+                <th>Room Tier & Stay</th>
+                <th>Items Breakdown</th>
+                <th style="text-align: right;">Grand Total</th>
+                <th style="text-align: center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- INVOICE MODAL -->
+  <div id="invoiceModal" class="class26 class28">
+    <div class="class27">
+      <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 15px;">
+        <h3 style="font-weight: bold; font-size: 15px;">Official Patient Invoice Statement</h3>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="printInvoice()" class="class24" style="padding: 6px 12px;"><i class="fa-solid fa-print"></i> Print Invoice</button>
+          <button onclick="closeInvoiceModal()" class="class25" style="padding: 6px 12px;">Close</button>
+        </div>
+      </div>
+
+      <div id="printableInvoice" style="font-size: 12px; display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px;">
+          <div>
+            <h2 style="font-size: 16px; font-weight: bold; color: #0f172a;">PASIG GENERAL HOSPITAL</h2>
+            <p style="color: #64748b;">Medical Records & Financial Billing Department</p>
+          </div>
+          <div style="text-align: right;">
+            <p id="inv-id" style="font-weight: bold; font-family: monospace; font-size: 14px;">INV-2026-0000</p>
+            <p style="color: #64748b;">Date: <span id="inv-date">--</span></p>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; padding: 10px; border-radius: 4px; border: 1px solid #e2e8f0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <p style="color: #64748b;">Patient Name:</p>
+            <p id="inv-patientName" style="font-weight: bold; font-size: 13px;">--</p>
+            <p style="color: #64748b; margin-top: 4px;">Age / Gender: <span id="inv-patientInfo" style="color: #0f172a;">--</span></p>
+          </div>
+          <div>
+            <p style="color: #64748b;">Attending Physician:</p>
+            <p id="inv-physician" style="font-weight: bold; color: #0f172a;">--</p>
+            <p style="color: #64748b; margin-top: 4px;">Accommodation: <span id="inv-roomCategory" style="color: #0f172a;">--</span></p>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-weight: bold; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 8px;">Itemized Charges</h4>
+          <table class="class20">
+            <thead>
+              <tr>
+                <th>Item / Description</th>
+                <th style="text-align: center;">Category</th>
+                <th style="text-align: right;">Amount (₱)</th>
+              </tr>
+            </thead>
+            <tbody id="inv-itemsTable"></tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; border-top: 1px solid #cbd5e1; padding-top: 10px;">
+          <div style="width: 250px; display: flex; flex-direction: column; gap: 4px; text-align: right;">
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Consultation Fee:</span><span id="inv-subConsultation">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Room Accommodation:</span><span id="inv-subRoom">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Procedures & Lab:</span><span id="inv-subProcedures">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; color: #64748b;"><span>Pharmacy & Medicines:</span><span id="inv-subMedicines">₱0.00</span></div>
+            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 15px; color: #0f172a; border-top: 1px solid #cbd5e1; padding-top: 6px; margin-top: 4px;">
+              <span>Grand Total Due:</span>
+              <span id="inv-grandTotal" style="color: #2563eb;">₱0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PASIG HEALTH - Room & Service Rates</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="class1">
+    <aside class="class2">
+      <div class="class3">
+        <div class="LogoBackground">+</div>
+        <div>
+          <h1 style="font-size: 15px; font-weight: bold; color: #fff;">PASIG HEALTH</h1>
+          <p style="font-size: 11px; color: #94a3b8;">Billing & Health Records</p>
+        </div>
+      </div>
+
+      <nav class="class5">
+        <a href="billing.html" class="class6">
+          <i class="fa-solid fa-file-invoice-dollar" style="width: 18px;"></i>
+          <span>Billing Form</span>
+        </a>
+        <a href="history.html" class="class6">
+          <i class="fa-solid fa-clock-rotate-left" style="width: 18px;"></i>
+          <span>Records & History</span>
+        </a>
+        <a href="rates.html" class="class6 class7">
+          <i class="fa-solid fa-list-check" style="width: 18px;"></i>
+          <span>Room & Service Rates</span>
+        </a>
+        <a href="payments.html" class="class6">
+          <i class="fa-solid fa-wallet" style="width: 18px;"></i>
+          <span>Payment Collection</span>
+        </a>
+        <a href="reports.html" class="class6">
+          <i class="fa-solid fa-chart-line" style="width: 18px;"></i>
+          <span>Billing Reports</span>
+        </a>
+      </nav>
+
+      <div style="padding: 12px; border-top: 1px solid #1e293b; font-size: 11px; color: #64748b;">
+        <p style="color: #cbd5e1; font-weight: bold;">Terminal: BSIT Tester</p>
+        <p>Operator: Admin</p>
+      </div>
+    </aside>
+
+    <main class="class8">
+      <header class="class9">
+        <div>
+          <h2 style="font-size: 18px; font-weight: bold; color: #0f172a;">Standard Room & Service Fee Schedule</h2>
+          <p style="font-size: 12px; color: #64748b;">Official hospital rates sheet for rooms, diagnostics, and pharmaceutical items.</p>
+        </div>
+        <div style="font-size: 12px; background: #f1f5f9; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 4px;">
+          <i class="fa-regular fa-calendar" style="color: #64748b; margin-right: 5px;"></i>
+          <span id="current-date-display" style="font-weight: bold;">--</span>
+        </div>
+      </header>
+
+      <div class="class10">
+        <div class="class11">
+          <div class="class12">Standard Room Tariff & Accommodation Matrix</div>
+          <div style="padding: 15px;">
+            <table class="class20">
+              <thead>
+                <tr>
+                  <th>Room Classification</th>
+                  <th>Daily Tariff Rate</th>
+                  <th>Inclusions & Standard Facilities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="font-weight: bold;">Outpatient / No Room Stay</td><td>₱0.00 / day</td><td style="color: #64748b;">Day visits, Emergency consultations, Quick OPD procedures.</td></tr>
+                <tr><td style="font-weight: bold;">General Ward</td><td>₱1,000.00 / day</td><td style="color: #64748b;">Shared room (4-6 beds), Centralized air conditioning, Standard nursing.</td></tr>
+                <tr><td style="font-weight: bold;">Semi-Private Room</td><td>₱2,500.00 / day</td><td style="color: #64748b;">Dual occupant room, En-suite bathroom, Dedicated television & wifi.</td></tr>
+                <tr><td style="font-weight: bold;">Private Room</td><td>₱5,000.00 / day</td><td style="color: #64748b;">Single occupant suite, Refrigerator, Sofa bed for companion, 24/7 care.</td></tr>
+                <tr><td style="font-weight: bold;">ICU - Intensive Care Unit</td><td>₱15,000.00 / day</td><td style="color: #64748b;">Continuous telemetry monitoring, Specialized critical care unit nursing.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="class11">
+          <div class="class12">Common Standard Medical & Diagnostic Fee Schedule</div>
+          <div style="padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; background: #f8fafc; font-size: 12px;">
+              <h4 style="font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; margin-bottom: 8px;">Laboratory & Diagnostic Tests</h4>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Complete Blood Count (CBC)</span><strong>₱350.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Urinalysis Routine</span><strong>₱180.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Chest X-Ray (PA View)</span><strong>₱650.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>12-Lead Electrocardiogram (ECG)</span><strong>₱500.00</strong></p>
+            </div>
+
+            <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; background: #f8fafc; font-size: 12px;">
+              <h4 style="font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; margin-bottom: 8px;">Standard Medicine Index</h4>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Paracetamol - 500 mg (tablet)</span><strong>₱15.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Amoxicillin - 500 mg (capsule)</span><strong>₱35.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>Mefenamic Acid - 500 mg (capsule)</span><strong>₱25.00</strong></p>
+              <p style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>IV Normal Saline Solution 0.9% - 1000 ml</span><strong>₱350.00</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
